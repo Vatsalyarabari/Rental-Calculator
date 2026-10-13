@@ -6,128 +6,139 @@
 <title>Fab-Form Rental Calculator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f3f2ef; --panel:#ffffff; --panel-2:#f8f7f4; --ink:#1d1f22; --ink-2:#5b6068; --line:#e2e0da;
-  --accent:#d6331f; --accent-ink:#ffffff; --accent-soft:#fbe7e3; --good:#1f7a4d; --img-bg:#ffffff;
-  --shadow:0 1px 2px rgba(0,0,0,.05),0 6px 20px rgba(0,0,0,.05);
+  --navy:#202839; --navy-2:#373e4d; --orange:#fcae17; --gold:#9c6c00; --soft:#fff7e6;
+  --bg:#ffffff; --panel:#ffffff; --panel-2:#f8f9fa; --ink:#212529; --ink-2:#6c757d; --line:#dee2e6;
+  --accent:var(--orange); --good:#198754; --img-bg:#ffffff;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#141518; --panel:#1d1f23; --panel-2:#23262b; --ink:#eceae5; --ink-2:#a0a4ab; --line:#2f3238;
-    --accent:#ef4a33; --accent-soft:#3a1d18; --good:#4fc28a; --img-bg:#f4f4f2; --shadow:none;
+    --bg:#151a26; --panel:#1c2232; --panel-2:#242b3d; --ink:#e9ecef; --ink-2:#9aa3b2; --line:#323a4f;
+    --gold:#fcae17; --soft:#3a3220; --good:#4fc28a; --img-bg:#f4f4f2;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#141518; --panel:#1d1f23; --panel-2:#23262b; --ink:#eceae5; --ink-2:#a0a4ab; --line:#2f3238;
-  --accent:#ef4a33; --accent-soft:#3a1d18; --good:#4fc28a; --img-bg:#f4f4f2; --shadow:none;
+  --bg:#151a26; --panel:#1c2232; --panel-2:#242b3d; --ink:#e9ecef; --ink-2:#9aa3b2; --line:#323a4f;
+  --gold:#fcae17; --soft:#3a3220; --good:#4fc28a; --img-bg:#f4f4f2;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html,body{margin:0}
-body{background:var(--bg);color:var(--ink);font:15px/1.45 "Barlow",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 "Roboto",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
 button,input,select{font:inherit;color:inherit}
-.wrap{max-width:1280px;margin:0 auto;padding:20px 16px 60px}
 
-/* header */
-header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-.brand{display:flex;align-items:center;gap:12px}
-.mark{width:42px;height:42px;border-radius:10px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font:800 20px "Barlow Condensed",sans-serif;letter-spacing:.5px}
-h1{margin:0;font:800 26px/1 "Barlow Condensed",sans-serif;letter-spacing:.3px;text-transform:uppercase}
-.sub{color:var(--ink-2);font-size:13px;margin-top:3px}
-.head-actions{display:flex;gap:8px;flex-wrap:wrap}
+/* top nav — mirrors shop.fab-form.com */
+.topbar{background:var(--navy);color:#fff}
+.topbar-in{max-width:1320px;margin:0 auto;padding:0 16px;height:62px;display:flex;align-items:center;gap:28px}
+.wordmark{font:italic 900 30px/1 "Roboto",sans-serif;color:var(--orange);letter-spacing:-.5px;text-decoration:none;white-space:nowrap;transform:skewX(-6deg)}
+.nav{display:flex;gap:22px;font-size:18px}
+.nav span{color:#fff}
+.nav span.dim{color:#c3c7cf}
+.top-actions{margin-left:auto;display:flex;gap:10px;align-items:center}
+.circle{width:42px;height:42px;border-radius:50%;background:var(--navy-2);border:0;color:#fff;display:grid;place-items:center;cursor:pointer;font-size:17px}
+.circle:hover{background:#4a5263}
+.subbar{border-bottom:1px solid var(--line)}
+.subbar-in{max-width:1320px;margin:0 auto;padding:6px 16px;text-align:right;font-size:14px;color:var(--ink-2)}
+.subbar-in b{color:var(--ink)}
 
-.btn{border:1px solid var(--line);background:var(--panel);border-radius:9px;padding:8px 13px;cursor:pointer;font-weight:600;font-size:14px;transition:background .15s,border-color .15s,transform .05s}
+.wrap{max-width:1320px;margin:0 auto;padding:22px 16px 60px}
+header.page{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+h1{margin:0;font-weight:500;font-size:28px;line-height:1.2}
+.sub{color:var(--ink-2);font-size:14px;margin-top:2px}
+
+.btn{border:1px solid var(--line);background:var(--panel);border-radius:4px;padding:8px 14px;cursor:pointer;font-weight:500;font-size:15px;transition:background .15s,border-color .15s}
 .btn:hover{border-color:var(--ink-2)}
-.btn:active{transform:translateY(1px)}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.btn.primary:hover{filter:brightness(1.07)}
+.btn.primary{background:var(--orange);border-color:var(--orange);color:var(--navy);font-weight:700}
+.btn.primary:hover{filter:brightness(.96)}
 .btn.ghost{background:transparent}
 
 /* duration bar */
-.duration{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;margin-bottom:18px}
-.dur-readout .label{font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:var(--ink-2);font-weight:600}
-.dur-readout .big{font:800 34px/1 "Barlow Condensed",sans-serif;margin-top:4px}
-.dur-readout .small{color:var(--ink-2);font-size:13px;margin-top:3px}
+.duration{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:16px 18px;display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;margin-bottom:20px;border-left:4px solid var(--orange)}
+.dur-readout .label{font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:var(--ink-2);font-weight:500}
+.dur-readout .big{font-weight:700;font-size:32px;line-height:1;margin-top:4px;color:var(--ink)}
+.dur-readout .small{color:var(--ink-2);font-size:14px;margin-top:4px}
 .dur-controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.group{display:flex;gap:6px;align-items:center;padding-right:10px;margin-right:2px;border-right:1px solid var(--line)}
+.group{display:flex;gap:6px;align-items:center;padding-right:12px;border-right:1px solid var(--line)}
 .group:last-child{border-right:0}
-.group-label{font-size:12px;color:var(--ink-2);font-weight:600;text-transform:uppercase;letter-spacing:.6px;margin-right:2px}
-.chip{border:1px solid var(--line);background:var(--panel-2);border-radius:999px;padding:7px 13px;font-weight:600;cursor:pointer;font-size:14px}
-.chip:hover{border-color:var(--ink-2)}
-.chip.on{background:var(--ink);color:var(--panel);border-color:var(--ink)}
-.chip.add{background:var(--accent-soft);border-color:transparent;color:var(--accent)}
-.chip.add:hover{border-color:var(--accent)}
+.group-label{font-size:12px;color:var(--ink-2);font-weight:500;text-transform:uppercase;letter-spacing:.6px;margin-right:2px}
+.chip{border:1px solid var(--line);background:var(--panel);border-radius:4px;padding:7px 14px;font-weight:500;cursor:pointer;font-size:15px}
+.chip:hover{border-color:var(--orange)}
+.chip.on{background:var(--soft);border-color:var(--orange);color:var(--ink);font-weight:700}
+.chip.add{background:var(--navy);border-color:var(--navy);color:#fff}
+.chip.add:hover{background:var(--navy-2)}
 .chip.sub{color:var(--ink-2)}
+.hint{color:var(--ink-2);font-size:13px}
 
 /* layout */
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:18px;align-items:start}
-.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
-.search{flex:1;min-width:180px;border:1px solid var(--line);background:var(--panel);border-radius:9px;padding:9px 12px}
-.toggle{display:flex;align-items:center;gap:7px;font-size:14px;color:var(--ink-2);cursor:pointer;user-select:none}
-.toggle input{accent-color:var(--accent);width:16px;height:16px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:22px;align-items:start}
+.toolbar{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.search{flex:1;min-width:180px;border:0;border-bottom:1px solid var(--line);background:transparent;padding:10px 4px;font-size:16px;outline:none}
+.search:focus{border-bottom-color:var(--orange)}
+.toggle{display:flex;align-items:center;gap:7px;font-size:15px;color:var(--ink-2);cursor:pointer;user-select:none}
+.toggle input{accent-color:var(--orange);width:16px;height:16px}
 
-.section-title{font:700 14px "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:1px;color:var(--ink-2);margin:18px 2px 10px;display:flex;align-items:center;gap:8px}
+.section-title{font-size:18px;font-weight:500;color:var(--ink);margin:20px 2px 12px;display:flex;align-items:center;gap:12px}
 .section-title::after{content:"";flex:1;height:1px;background:var(--line)}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:border-color .15s,box-shadow .15s}
-.card.active{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
-.thumb{position:relative;height:150px;background:var(--img-bg);display:flex;align-items:center;justify-content:center;padding:12px;border-bottom:1px solid var(--line);overflow:hidden}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .15s,box-shadow .15s}
+.card:hover{box-shadow:0 4px 14px rgba(32,40,57,.08)}
+.card.active{border-color:var(--orange);box-shadow:0 0 0 1px var(--orange)}
+.thumb{position:relative;height:160px;background:var(--img-bg);display:flex;align-items:center;justify-content:center;padding:14px;overflow:hidden}
 .thumb img{display:block;width:100%;height:100%;object-fit:contain}
-.thumb .noimg{font:800 30px "Barlow Condensed",sans-serif;color:#b9b7b0;letter-spacing:1px}
-.badge{position:absolute;top:9px;left:9px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;padding:3px 7px;border-radius:6px}
-.qty-badge{position:absolute;top:9px;right:9px;background:var(--ink);color:var(--panel);font-weight:700;font-size:13px;padding:3px 9px;border-radius:999px;display:none}
+.thumb .noimg{font:italic 900 26px "Roboto",sans-serif;color:#c9ccd2;text-align:center;line-height:1.1}
+.badge{position:absolute;top:9px;left:9px;background:var(--orange);color:var(--navy);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;padding:3px 7px;border-radius:3px}
+.qty-badge{position:absolute;top:9px;right:9px;background:var(--navy);color:#fff;font-weight:700;font-size:13px;padding:3px 9px;border-radius:999px;display:none}
 .card.active .qty-badge{display:block}
-.body{padding:11px 12px 12px;display:flex;flex-direction:column;gap:9px;flex:1}
-.name{font:700 19px/1.1 "Barlow Condensed",sans-serif;letter-spacing:.2px}
-.rate{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2)}
-.rate input{width:76px;border:1px solid var(--line);background:var(--panel-2);border-radius:7px;padding:4px 6px;font-weight:600;color:var(--ink);text-align:right}
-.rate input.changed{border-color:var(--accent);color:var(--accent)}
-.stepper{display:grid;grid-template-columns:38px 1fr 38px;border:1px solid var(--line);border-radius:9px;overflow:hidden;margin-top:auto}
-.stepper button{border:0;background:var(--panel-2);cursor:pointer;font-size:19px;font-weight:600;line-height:1}
-.stepper button:hover{background:var(--line)}
+.body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:8px;flex:1}
+.name{font-size:20px;font-weight:400;color:var(--gold);line-height:1.2}
+.rate{display:flex;align-items:center;gap:5px;font-size:15px;color:var(--ink-2)}
+.rate input{width:78px;border:1px solid var(--line);background:var(--panel);border-radius:4px;padding:3px 6px;font-size:18px;color:var(--ink);text-align:left}
+.rate input.changed{border-color:var(--orange);background:var(--soft)}
+.stepper{display:grid;grid-template-columns:38px 1fr 38px;border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-top:auto}
+.stepper button{border:0;background:var(--panel-2);cursor:pointer;font-size:19px;line-height:1}
+.stepper button:hover{background:var(--soft);color:var(--gold)}
 .stepper input{border:0;border-left:1px solid var(--line);border-right:1px solid var(--line);background:var(--panel);text-align:center;font-weight:700;font-size:16px;padding:7px 0;width:100%;-moz-appearance:textfield}
 .stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-.line-total{display:flex;justify-content:space-between;font-size:13px;color:var(--ink-2)}
-.line-total b{color:var(--ink);font-size:15px}
+.line-total{display:flex;justify-content:space-between;font-size:14px;color:var(--ink-2)}
+.line-total b{color:var(--ink);font-size:16px}
 
 /* summary */
 aside{position:sticky;top:16px}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
-.panel h2{margin:0;padding:14px 16px;font:800 20px "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
-.panel h2 span{font:600 13px "Barlow",sans-serif;color:var(--ink-2);text-transform:none;letter-spacing:0}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.panel h2{margin:0;padding:13px 16px;font-weight:500;font-size:19px;background:var(--navy);color:#fff;display:flex;justify-content:space-between;align-items:center}
+.panel h2 span{font-weight:400;font-size:14px;color:var(--orange)}
 .lines{max-height:330px;overflow:auto;padding:4px 16px}
-.lines .empty{color:var(--ink-2);padding:22px 0;text-align:center;font-size:14px}
-.ln{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:9px 0;border-bottom:1px dashed var(--line)}
+.lines .empty{color:var(--ink-2);padding:22px 0;text-align:center;font-size:15px}
+.ln{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:9px 0;border-bottom:1px solid var(--line)}
 .ln:last-child{border-bottom:0}
-.ln .n{font-weight:600}
-.ln .d{grid-column:1;color:var(--ink-2);font-size:12.5px}
+.ln .n{font-weight:500}
+.ln .d{grid-column:1;color:var(--ink-2);font-size:13px}
 .ln .t{grid-row:1/3;grid-column:2;align-self:center;font-weight:700}
 .totals{padding:12px 16px;border-top:1px solid var(--line);background:var(--panel-2);display:grid;gap:6px}
-.row{display:flex;justify-content:space-between;align-items:center;font-size:14px}
+.row{display:flex;justify-content:space-between;align-items:center;font-size:15px}
 .row.muted{color:var(--ink-2)}
 .row.disc{color:var(--good)}
-.row.grand{font:800 30px/1.1 "Barlow Condensed",sans-serif;margin-top:6px;padding-top:10px;border-top:1px solid var(--line)}
-.row.grand small{font:600 13px "Barlow",sans-serif;color:var(--ink-2)}
+.row.grand{font-size:28px;font-weight:700;line-height:1.1;margin-top:6px;padding-top:10px;border-top:2px solid var(--orange)}
+.row.grand small{font-size:13px;font-weight:400;color:var(--ink-2)}
 .actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px 16px 16px}
 .actions .btn{width:100%}
 
-details.settings{margin-top:12px}
-details.settings summary{cursor:pointer;font-weight:700;padding:12px 16px;list-style:none;display:flex;justify-content:space-between}
+details.settings{margin-top:14px}
+details.settings summary{cursor:pointer;font-weight:500;padding:12px 16px;list-style:none;display:flex;justify-content:space-between}
 details.settings summary::-webkit-details-marker{display:none}
-details.settings summary::after{content:"+";font-size:18px;color:var(--ink-2)}
+details.settings summary::after{content:"+";font-size:18px;color:var(--gold)}
 details.settings[open] summary::after{content:"–"}
-.settings-body{padding:0 16px 16px;display:grid;gap:14px;font-size:14px}
-.settings-body h3{margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.7px;color:var(--ink-2)}
-.tier{display:grid;grid-template-columns:auto 70px auto 60px auto 30px;gap:6px;align-items:center;margin-bottom:6px;font-size:13.5px}
-.tier input,.field input,.field select{border:1px solid var(--line);background:var(--panel-2);border-radius:7px;padding:5px 7px;width:100%}
+.settings-body{padding:0 16px 16px;display:grid;gap:14px;font-size:15px}
+.settings-body h3{margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.7px;color:var(--ink-2);font-weight:500}
+.tier{display:grid;grid-template-columns:auto 70px auto 60px auto 30px;gap:6px;align-items:center;margin-bottom:6px;font-size:14px}
+.tier input,.field input,.field select{border:1px solid var(--line);background:var(--panel);border-radius:4px;padding:5px 7px;width:100%}
 .tier .x{border:0;background:none;cursor:pointer;color:var(--ink-2);font-size:17px}
-.field{display:grid;grid-template-columns:1fr 110px;gap:8px;align-items:center}
-.hint{color:var(--ink-2);font-size:12.5px}
+.field{display:grid;grid-template-columns:1fr 120px;gap:8px;align-items:center}
 
-.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--panel);padding:10px 16px;border-radius:9px;font-weight:600;opacity:0;transition:.2s;pointer-events:none;z-index:9}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;border-left:4px solid var(--orange);padding:10px 16px;border-radius:4px;font-weight:500;opacity:0;transition:.2s;pointer-events:none;z-index:9}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 @media (max-width:980px){
@@ -135,39 +146,45 @@ details.settings[open] summary::after{content:"–"}
   aside{position:static}
   .duration{grid-template-columns:1fr}
 }
+@media (max-width:640px){
+  .nav{display:none}
+  .wordmark{font-size:24px}
+}
 @media (max-width:520px){
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-  .thumb{height:110px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .thumb{height:115px}
   .name{font-size:17px}
   .group{border-right:0;padding-right:0;flex-wrap:wrap}
-  h1{font-size:22px}
+  h1{font-size:23px}
 }
-
-/* print = clean quote */
 @media print{
   body{background:#fff;color:#000}
-  header .head-actions,.duration .dur-controls,.toolbar,main,details.settings,.actions,.section-title{display:none!important}
+  .topbar,.subbar,header .head-actions,.duration .dur-controls,.duration .hint,.toolbar,main,details.settings,.actions{display:none!important}
   .layout{display:block}
   aside{position:static}
-  .panel{border:0;box-shadow:none}
   .lines{max-height:none}
-  .duration{border:0;box-shadow:none;padding:0}
+  .duration{border:0;padding:0}
+  .panel h2{background:none;color:#000;border-bottom:2px solid #000}
 }
 </style>
 </head>
 <body>
+<div class="topbar"><div class="topbar-in">
+  <span class="wordmark">FAB-FORM</span>
+  <nav class="nav"><span>Rental Calculator</span><span class="dim">Used Equipment</span></nav>
+  <div class="top-actions">
+    <button class="circle" id="themeBtn" title="Toggle light/dark" aria-label="Toggle theme">◐</button>
+  </div>
+</div></div>
+<div class="subbar"><div class="subbar-in">Quote date: <b id="quoteDate"></b></div></div>
 <div class="wrap">
 
-  <header>
-    <div class="brand">
-      <div class="mark">FF</div>
-      <div>
-        <h1>Rental Calculator</h1>
-        <div class="sub">Fab-Form used equipment rentals · <span id="quoteDate"></span></div>
-      </div>
+  <header class="page">
+    <div>
+      <h1>Rental Quote</h1>
+      <div class="sub">Pick a period, enter quantities, and the total updates as you go.</div>
     </div>
     <div class="head-actions">
-      <button class="btn ghost" id="themeBtn" title="Toggle light/dark">◐ Theme</button>
       <button class="btn" id="resetQty">Clear quantities</button>
     </div>
   </header>
